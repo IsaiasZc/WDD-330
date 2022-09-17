@@ -1,12 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap');
 
 :root {
   --primary-color: #272727;
   --secondary-color: #cdedab;
-  --hover-link: #da9595;
+  --link-primary: #7AAFDB;
 }
 
 body {
   font-family: 'Ubuntu Mono', monospace;
+}
+
+/*------- General classes -------*/
+
+.tab {
+  padding-left: 1.4rem;
+}
+
+.m-y {
+  margin: 1rem 0;
+}
+
+.gap-1 {
+  gap: 1rem;
+}
+
+.gap-2 {
+  gap: 2rem;
+}
+
+.max-w {
+  width: 84%;
+  max-width: 60rem;
 }
 
 /*----------- MAIN ---------*/
@@ -14,6 +38,7 @@ body {
 .main {
   height: 100vh;
   display: grid;
+  margin: auto;
   place-items: center;
 }
 
@@ -30,31 +55,22 @@ body {
 .list {
   display: flex;
   flex-direction: column;
-  gap: .5rem;
 }
 
 .item__link {
   text-decoration: none;
   color: var(--primary-color);
-  display: flex;
-  flex-direction: column;
   font-size: 1.2rem;
-  position: relative;
   transition: all .2s;
+  border-bottom: 2px solid var(--secondary-color);
 }
 
 
-.item__link::after {
-  content: "";
-  height: 2px;
-  width: 100%;
-  border-radius: 5px;
-  background-color: var(--secondary-color);
-  position: absolute;
-  bottom: .1rem;
-  transition: all .2s;
+.item__link:hover {
+  border-color: var(--link-primary);
 }
 
-.list__item:hover > .item__link::after {
-  background-color: var(--hover-link);
+.item__link-primary {
+  color: var(--link-primary);
+  font-size: 1rem;
 }

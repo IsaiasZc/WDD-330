@@ -4,11 +4,13 @@
 <head>
   <title>Story Writer</title>
   <script>
+    
     function loadStory() {
       var storyName = document.getElementById("name_input").value;
-      var storyHTML = localStorage.getItem(storyName);
+      var storyHTML = localStorage.getItem(storyName); // and if the key doesn't exist? it returns an error, undefined or null?
       document.getElementById("story_editor").value = storyHTML;
     }
+
     function saveStory() {
       var storyName = document.getElementById("name_input").value;
       var storyHTML = document.getElementById("story_editor").value;
