@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <!-- First Challenge -->
+  <input id="input" type="text">
+  <button id="button1">Click</button>
+  <div id="output"></div>
+
+  <br>
+
+  <!-- Second Challenge -->
+  <input id="input2" type="text">
+  <button id="button2">Sum All</button>
+  <div id="output2"></div>
+
+  <br>
+  <!-- Third Challenge -->
+  <input id="input3-1" type="text">
+  <input id="input3-2" type="text">
+  <button id="button3">+</button>
+  <div id="output3"></div>
+
+
+  <script>
+    // First Challenge
+
+    const button1 = document.getElementById("button1");
+
+    button1.addEventListener("click",() => {
+      const input = document.getElementById("input").value;
+      const output = document.getElementById("output");
+
+      output.textContent = input;
+    })
+
+    // Second Challenge
+
+    const sumNumbers = (n) => {
+      let sum = 0;
+
+      for(let i = 0; i <= n; i++) {
+          sum += i;
+      }
+
+      return sum
+    }
+
+    const button2 = document.getElementById("button2");
+
+    button2.addEventListener("click", () => {
+      const input = parseInt(document.getElementById("input2").value);
+      const output = document.getElementById("output2");
+
+      if(!Number.isNaN(input)) {
+
+        output.textContent = sumNumbers(input);
+      }
+      
+    })
+
+
+    // Third Challenge
+
+    const button3 = document.getElementById("button3");
+
+    button3.addEventListener("click", () => {
+      const input1 = parseInt(document.getElementById("input3-1").value);
+      const input2 = parseInt(document.getElementById("input3-2").value);
+      const output = document.getElementById("output3");
+
+      if(!Number.isNaN(input1) && !Number.isNaN(input2)) {
+
+        output.textContent = input1 + input2;
+
+      } else {
+        alert("Some of the values is not a Number")
+      }
+
+    })
+
+
+  </script>
+</body>
+</html>
