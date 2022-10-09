@@ -10,7 +10,11 @@ const links = [
   {
     label: 'Week-3 notes',
     url: './week3/'
-  },  
+  },
+  {
+    label: 'Week-4 notes',
+    url: './week4/'
+  },
 ];
 
 const LIST = document.getElementById('list');
