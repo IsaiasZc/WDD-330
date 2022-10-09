@@ -61,7 +61,11 @@ const game = {
   },
 
   endGame(player) {
-    alert(`${player.name} is the Winner!`);
+    setTimeout(() => {
+      alert(`${player.name} is the Winner!`)
+    },
+      "500"
+    )
   }
 
 };
