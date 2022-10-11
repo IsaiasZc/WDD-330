@@ -1,0 +1,18 @@
+body {
+  height: 100vh;
+  place-items: center;
+}
+
+.main {
+  height: 80vh;
+}
+
+.task-section {
+  border: 1px solid #3f3f3f;
+  border-radius: .5rem;
+}
+
+#tasks {
+  min-height: 250px;
+  height: 35vh;
+}
