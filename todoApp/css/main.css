@@ -16,3 +16,11 @@ body {
   min-height: 250px;
   height: 35vh;
 }
+
+.form-check-label {
+  width: 80%;
+}
+
+.check-box:checked ~ span {
+  text-decoration: line-through;
+}
