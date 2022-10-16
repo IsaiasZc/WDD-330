@@ -24,3 +24,7 @@ body {
 .check-box:checked ~ span {
   text-decoration: line-through;
 }
+
+.hidden {
+  display: none !important;
+}
