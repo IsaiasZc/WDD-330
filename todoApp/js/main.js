@@ -3,6 +3,19 @@ import Utililies from "./utilities.js";
 import Ls from "./ls.js";
 
 (function () {
+
+  // Controller object
+  const ctlr = {
+    filter(list, completed="all") {
+      let newList = list.filter( element => {
+        element.classList.remove('hidden');
+        return element.childNodes[0].childNodes[0].checked != ( completed == "all" ? element.childNodes[0].childNodes[0].checked : completed);
+      });
+
+      newList.forEach( element => element.classList.add("hidden"));
+    },
+
+  }
   
   const todo = new ToDos;
   const ls = new Ls;
@@ -27,6 +40,8 @@ import Ls from "./ls.js";
 
 
   });
+
+  ctlr.filter(utl.todoItems)
 
 
 }())

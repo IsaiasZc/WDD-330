@@ -29,7 +29,7 @@ class ToDos {
   };
 
   setTodoList(arr, utl, ls) {
-    console.log(arr);
+    // console.log(arr);
     arr.forEach( todo => this.newTodo(todo, utl, ls))
   };
 
