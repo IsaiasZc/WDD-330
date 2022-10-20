@@ -1,108 +1,79 @@
 // Here we manipulate the DOM
 
-class Utililies {
+export default class Utililies {
   constructor(ids, form) {
-    this.ids = ids;
-    this.elems = {};
+    this.elems = createElementsReference(ids);
     this.form = document.forms[form];
     this.todoItems = [];
 
     // Run the evet listener of the form
     // this._formEvent();
-  };
-
-  createElementsReference(){ 
-    this.ids.forEach(id => {
-      this.elems[this._generateName(id)] = document.getElementById(id);
-    });
-
-  };
-
-  _generateName(str) {
-    let words = str.split('-');
-    words = words.map((word, idx) => idx == 0 ? word : word.charAt(0).toUpperCase() + word.slice(1));
-    return words.join('');  
-  };
+  }
 
   renderTodo(todoELement, where) {
     where.appendChild(todoELement);
-  };
+  }
 
-  // createTodos(todoList) {
-  //   todoList.forEach(todo => this.newTodoElement(todo));
-  // };
-
-  newTodoElement(todo, todoList, ls) {
-    let divContainer = document.createElement('div');
-    let check = document.createElement('input');
-    let label = document.createElement('label');
-    let delButton = document.createElement('button');
+  /**
+   * Create a new Todo Element (node) that exist in the program.
+   * @param {node} todoObj - todo Object.
+   * @param {function} btnFunction -Function.
+   * @param {function} checkFuntion -Function.
+   */
+  newTodoElement(todoObj, btnFunction, checkFuntion) {
+    let divContainer = document.createElement("div");
 
     // Setup divContainer
-    divContainer.className = 'form-check d-flex justify-content-between py-1 align-items-center';
+    divContainer.className = "form-check d-flex justify-content-between py-1 align-items-center";
+
+    divContainer.innerHTML = `
+      <label class="form-check-label d-flex align-items-center gap-2">
+        <input class="form-check-input check-box" type="checkbox">
+        <span>${todoObj.content}</span>
+      </label>
+      <button class="btn btn-danger"><i class="bi bi-x"></i></button>
+    `;
 
     // Setup check
-    check.className = 'form-check-input check-box';
-    check.type = 'checkbox';
-    check.addEventListener('change',() => {
 
-      todo.completed = check.checked;
-
-      ls.setLS(todoList);
-    })
-
-    if(todo.completed) {
-      check.checked = true;
-      check.classList.add('checked');
-    }
-
-    // Setup Label
-    const labelClasses = 'form-check-label d-flex align-items-center gap-2';
-    label.className = labelClasses;
-    label.innerHTML = `<span>${todo.content}</span>`;
+    let check = divContainer.children[0].children[0];
+    check.checked = todoObj.completed;
+    check.addEventListener("change", () => {
+      checkFuntion(todoObj, check);
+    });
 
     // Setup delButton
-    delButton.innerHTML = '<i class="bi bi-x"></i>';
-    delButton.className = 'btn btn-danger';
+    let delButton = divContainer.children[1];
 
-    delButton.addEventListener('click', () => {
-      let idx = todoList.indexOf(todo);
-
-      todoList.splice(idx, 1);
-      this.todoItems.splice(idx, 1);
-
-      divContainer.remove();
-
-      ls.setLS(todoList);
-      console.log(this.todoItems);
-    })
-
-
-    // Insert inside divContainer
-    label.insertAdjacentElement('afterbegin', check);
-
-    divContainer.appendChild(label);
-    divContainer.appendChild(delButton);
+    delButton.addEventListener("click", () => {
+      btnFunction(todoObj, divContainer);
+    });
 
     // We need to insert the element to track it and render it in DOM
     this.todoItems.push(divContainer);
 
     this.renderTodo(divContainer, this.elems.tasks);
+  }
 
-
-
-  };
-  
-  setUp(ls, todo, utl) {
-
-    this.createElementsReference();
-
-    todo.setTodoList(ls.getLS(), utl, ls);
-
-    // this.createTodos(todo.getTodoList());
-  };
-
-
+  removeTodo(idx, element) {
+    this.todoItems.splice(idx, 1);
+    element.remove();
+  }
 }
 
-export default Utililies;
+const generateName = (str) => {
+  let words = str.split("-");
+  words = words.map((word, idx) =>
+    idx === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)
+  );
+  return words.join("");
+};
+
+const createElementsReference = (ids) => {
+  const elements = {};
+  ids.forEach((id) => {
+    elements[generateName(id)] = document.getElementById(id);
+  });
+
+  return elements;
+};
