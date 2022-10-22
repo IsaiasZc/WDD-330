@@ -19,6 +19,10 @@ const links = [
     label: 'Week-5 notes',
     url: './week5/'
   },
+  {
+    label: 'Week-6 notes',
+    url: './week6/'
+  }
 ];
 
 const LIST = document.getElementById('list');

@@ -1,11 +1,12 @@
 body {
   height: 100vh;
   place-items: center;
+  background-color: #F4F4F4;
 }
 
 .main {
   height: 80vh;
-  max-width: 1000px;
+  max-width: 800px;
 }
 
 .task-section {
@@ -37,7 +38,7 @@ body {
   cursor: pointer;
   /* border-bottom: 2px solid #0b5ed7; */
   transition: all .3s;
-  border-bottom: 2px solid #FFF;
+  border-bottom: 2px solid #F4F4F4;
 }
 
 .active {
