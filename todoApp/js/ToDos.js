@@ -32,12 +32,16 @@ export default class ToDos {
   /**
    * This method is for starting the todoList when there's information in local storage
    * 
-   * arr: The array with the existing Todo's;
+   * @param {Array} arr The array with the existing Todo's;
    */
   setTodoList(arr) {
-    arr.forEach( todo => this.newTodo(todo))
+    arr.forEach( todo => this.newTodo(todo));
 
   };
+
+  remainingTask() {
+    return this._todoList.filter( todo => !todo.completed).length;
+  }
 
 
   /**

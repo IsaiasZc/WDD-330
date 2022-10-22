@@ -1,14 +1,23 @@
 // Here we manipulate the DOM
 
 class Utililies {
-  constructor(ids, form) {
+  constructor(ids, form, filterBtns) {
     this.ids = ids;
     this.elems = {};
     this.form = document.forms[form];
     this.todoItems = [];
+    this.filterBtns = document.getElementsByClassName(filterBtns);
 
     // Run the evet listener of the form
     // this._formEvent();
+  };
+
+  setFilterEvent(filterFunction) {
+    console.log(this.filterBtns);
+    this.filterBtns.forEach( btn => {
+      btn.addEventListener("click", filterFunction);
+    })
+
   };
 
   createElementsReference(){ 

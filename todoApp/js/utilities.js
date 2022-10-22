@@ -1,13 +1,28 @@
 // Here we manipulate the DOM
 
 export default class Utililies {
-  constructor(ids, form) {
+  constructor(ids, form, filterBtns) {
     this.elems = createElementsReference(ids);
     this.form = document.forms[form];
     this.todoItems = [];
+    this.filterBtns = Array.from(document.getElementsByClassName(filterBtns));
 
     // Run the evet listener of the form
     // this._formEvent();
+  };
+
+  // setFilterEvent(filterFunction) {
+  //   this.filterBtns.map( btn => {
+  //     btn.addEventListener("click", () => filterFunction(btn, this.filterBtns));
+  //   })
+
+  // };
+
+  getTodoItems() {
+    return this.todoItems;
+  }
+  getFilterBtns() {
+    return this.filterBtns;
   }
 
   renderTodo(todoELement, where) {
@@ -38,21 +53,23 @@ export default class Utililies {
 
     let check = divContainer.children[0].children[0];
     check.checked = todoObj.completed;
-    check.addEventListener("change", () => {
-      checkFuntion(todoObj, check);
-    });
+    // check.addEventListener("change", () => {
+    //   checkFuntion(todoObj, check);
+    // });
 
     // Setup delButton
     let delButton = divContainer.children[1];
 
-    delButton.addEventListener("click", () => {
-      btnFunction(todoObj, divContainer);
-    });
+    // delButton.addEventListener("click", () => {
+    //   btnFunction(todoObj, divContainer);
+    // });
 
     // We need to insert the element to track it and render it in DOM
     this.todoItems.push(divContainer);
 
     this.renderTodo(divContainer, this.elems.tasks);
+
+    return [check, delButton, divContainer]
   }
 
   removeTodo(idx, element) {
