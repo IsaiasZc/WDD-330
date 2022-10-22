@@ -1,10 +1,12 @@
 body {
   height: 100vh;
   place-items: center;
+  background-color: #F4F4F4;
 }
 
 .main {
   height: 80vh;
+  max-width: 800px;
 }
 
 .task-section {
@@ -15,6 +17,9 @@ body {
 #tasks {
   min-height: 250px;
   height: 35vh;
+  overflow-y: auto;
+  border: 1px solid #efefef;
+  border-radius: .5rem;
 }
 
 .form-check-label {
@@ -27,4 +32,15 @@ body {
 
 .hidden {
   display: none !important;
+}
+
+.filter {
+  cursor: pointer;
+  /* border-bottom: 2px solid #0b5ed7; */
+  transition: all .3s;
+  border-bottom: 2px solid #F4F4F4;
+}
+
+.active {
+  border-bottom: 2px solid #0d6efd;
 }

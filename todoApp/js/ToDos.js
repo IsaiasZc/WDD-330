@@ -1,43 +1,64 @@
 // Helper Functions about todo tasks here
 
-class ToDos {
+export default class ToDos {
 
-  constructor(todos=[]) {
-    this._todoList = todos;
+  constructor() {
+    this._todoList = [];
   };
 
-  newTodo(str, utl, ls) {
+  newTodo(strOrObj) {
 
     let newTodo;
 
-    if(typeof(str) === 'string') {
+    if(typeof(strOrObj) === 'string') {
       newTodo = {
         id: new Date,
-        content: str,
+        content: strOrObj,
         completed: false,
       };
     } else {
       newTodo = {
-        id: str.id,
-        content: str.content,
-        completed: str.completed,
+        id: strOrObj.id,
+        content: strOrObj.content,
+        completed: strOrObj.completed,
       };
     }
     
     this._todoList.push(newTodo);
-    utl.newTodoElement(newTodo, this._todoList, ls);
+    
+    return newTodo;
   };
 
-  setTodoList(arr, utl, ls) {
-    // console.log(arr);
-    arr.forEach( todo => this.newTodo(todo, utl, ls))
+  /**
+   * This method is for starting the todoList when there's information in local storage
+   * 
+   * @param {Array} arr The array with the existing Todo's;
+   */
+  setTodoList(arr) {
+    arr.forEach( todo => this.newTodo(todo));
+
   };
 
+  remainingTask() {
+    return this._todoList.filter( todo => !todo.completed).length;
+  }
+
+
+  /**
+   * 
+   * @returns The todo List
+   */
   getTodoList() {
     return this._todoList;
   };
 
 
-}
+  deleteTodo(todo) {
+    let idx = this._todoList.indexOf(todo);
+    this._todoList.splice(idx, 1);
 
-export default ToDos;
+    return idx;
+  };
+
+
+}
