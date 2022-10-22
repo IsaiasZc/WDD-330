@@ -3,14 +3,18 @@ import Utililies from "./utilities.js";
 import Ls from "./ls.js";
 
 (function () {
-  // Controller object
+  /**
+   * Control all the program.
+   * 
+   * Controller of a MVC model.
+   */
   class Control {
     /*  
       TODO
-      ?1.- Complete the filter (All, active, completed); 
-      ?2.- task left
-      *3.- Refactor the control 
-      !4.- Document all as possible
+      1.- Complete the filter (All, active, completed); - DONE
+      2.- task left - DONE
+      3.- Refactor the control - DONE
+      4.- Document all as possible - ALMOST DONE 😬
     */
     constructor() {
 
@@ -20,15 +24,18 @@ import Ls from "./ls.js";
       this.filterBtnClass = "filter";
       this.form = "addTodo";
       this.utl = new Utililies(this.ids, this.form, this.filterBtnClass);
+      this.filtered = "all";
     };
 
+    /**
+     * Run the program.
+     */
     setup() {
       this.todos.setTodoList(this.ls.getLS());
 
       this.todos
         .getTodoList()
         .forEach((todo) =>
-          // this.utl.newTodoElement(todo, this.btnFunction, this.checkFunction)
           this.newTodoTask(todo)
         );
 
@@ -37,10 +44,11 @@ import Ls from "./ls.js";
       this.refreskTaskLeft();
       
 
-      // this.filterTodos(this.utl.todoItems);
-      // this.utl.setFilterEvent(this.filterBtnActive);
     };
 
+    /**
+     * Run this method when the user add a new Todo from the form.
+     */
     formActivate() {
       this.utl.form.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -48,7 +56,6 @@ import Ls from "./ls.js";
         if (this.utl.form.newTask.value.length > 0) {
           let todo = this.utl.form.newTask.value;
           let todoObj = this.todos.newTodo(todo);
-          // this.utl.newTodoElement(todoObj, this.btnFunction, this.checkFunction);
           this.newTodoTask(todoObj);
           this.ls.setLS(this.todos.getTodoList());
         } else {
@@ -61,6 +68,10 @@ import Ls from "./ls.js";
 
     }
 
+    /**
+     * Create the todo element and adding its events (check and delete buttons).
+     * @param {node} todoObj todo Node.
+     */
     newTodoTask(todoObj) {
 
       const [check, delButton, divContainer] = this.utl.newTodoElement(todoObj);
@@ -81,6 +92,8 @@ import Ls from "./ls.js";
 
       btns.forEach( btn => btn.classList.remove("active"));
       btnActive.classList.add("active");
+
+      this.filtered = btnActive.id;
 
       this.filterTodos(btnActive.id);
 
@@ -105,6 +118,12 @@ import Ls from "./ls.js";
      */
     checkFunction(todo, check) {
       todo.completed = check.checked;
+      let divContainer = check.parentNode.parentNode;
+
+      if (this.filtered != "all") {
+        this.filterTodo(divContainer);
+      };
+
       refreshLS();
       this.refreskTaskLeft();
     };
@@ -135,22 +154,31 @@ import Ls from "./ls.js";
       newList.forEach((element) => element.classList.add("hidden"));
     };
 
+    filterTodo(todo) {
+      todo.classList.toggle("hidden");
+    };
+
     filtersActivate() {
       this.utl.getFilterBtns().forEach( (btn, idx, list) => {
         btn.addEventListener("click", () => this.filterBtnActive(btn, list))
       })
     }
   };
+  // END OF THE CLASS
+
+
+  /*--------- RUN THE PROGRAM --------------*/
 
   let ctrl = new Control();
   ctrl.setup();
 
-  // FUnctions
+  // Functions
 
+  /**
+   * Refreshing local storage;
+   */
   const refreshLS = () => {
     ctrl.ls.setLS(ctrl.todos.getTodoList());
   };
-
-  // Run Program
 
 })();
