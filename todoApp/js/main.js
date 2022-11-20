@@ -60,7 +60,7 @@ import Ls from "./ls.js";
           this.ls.setLS(this.todos.getTodoList());
         } else {
           alert("The todo can't be empty");
-        }
+        };
     
         this.ls.setLS(this.todos.getTodoList());
         this.utl.form.newTask.value = "";
