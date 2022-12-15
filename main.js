@@ -39,6 +39,14 @@ const links = [
     label: 'Week-10 notes',
     url: './week10/'
   },
+  {
+    label: 'final project',
+    url: 'https://isaiaszc.github.io/wdd330_weather/'
+  },
+  {
+    label: 'My Video : self evaluation',
+    url: 'https://youtu.be/N-LxqI7m9tc'
+  }
 ];
 
 const LIST = document.getElementById('list');
